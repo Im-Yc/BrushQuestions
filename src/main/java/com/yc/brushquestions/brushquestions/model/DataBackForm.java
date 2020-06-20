@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * @Author liuxin@worken.cn
  * @Date 2020-05-06 14:20:25
@@ -22,4 +24,7 @@ public class DataBackForm {
      * 文章发布时间(yyyy-MM-dd)
      */
     private String time;
+
+
+    private Date date;
 }

@@ -22,10 +22,83 @@ import java.util.List;
 @SpringBootTest
 class Easy_Array_Tests {
 
-    //旋转数组
+
+    
+
+    //加一(判断数字9和其它思路)  通过
+    @Test
+    void plusOne1_2() {
+        int digits[] = new int[]{9, 9, 9};
+//        int digits[] = new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+//        int digits[] = new int[]{9};
+        int length = digits.length;
+        //判断是否
+        Boolean flag = true;
+        int count = 0;
+        for (int i = 1; i <= length; i++) {
+            int digit = digits[length - i];
+            if (flag) {
+                if (digit != 9) {
+                    count = length - i;
+                    flag = false;
+                    break;
+                }
+            }
+        }
+        if (flag) {
+            int[] aArray = new int[digits.length + 1];
+            aArray[0] = digits[0] + 1;
+            for (int i = 1; i < aArray.length; i++) {
+                aArray[i] = 0;
+            }
+            System.out.println(aArray.toString());
+        } else {
+            int[] aArray = new int[digits.length];
+            for (int i = 0; i < aArray.length; i++) {
+                if (i == count) {
+                    aArray[i] = digits[i] + 1;
+                } else if (i > count) {
+                    aArray[i] = 0;
+                } else {
+                    aArray[i] = digits[i];
+                }
+            }
+            System.out.println(aArray.toString());
+        }
+    }
+
+    //加一(转字符串思路,不可行 因为int大小限制)
+    @Test
+    void plusOne1() {
+//        int digits[] = new int[]{9,9,9};
+        int digits[] = new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+        int length = digits.length;
+        Integer sum = 0;
+        for (int i = 0; i < length; i++) {
+            sum += Integer.parseInt(digits[i] * Math.pow(10, length - i - 1) + "");
+        }
+        sum += 1;
+        String ssum = sum + "";
+        int[] aArray = new int[ssum.length()];
+        for (int i = 0; i < ssum.length(); i++) {
+            aArray[i] = Integer.parseInt(ssum.charAt(i) + "");
+        }
+        System.out.println(aArray.toString());
+    }
+
+
+    // 存在重复元素
+    @Test
+    void containsDuplicate() {
+        int nums[] = new int[]{1, 2, 3, 1};
+
+    }
+
+
+    //旋转数组(未完成)
     @Test
     void rotate() {
-        int nums[] = new int[]{1,2,3,4,5,6};
+        int nums[] = new int[]{1, 2, 3, 4, 5, 6};
         int k = 4;
 //        int nums[] = new int[]{1,2};
 //        int k = 3;
@@ -33,18 +106,18 @@ class Easy_Array_Tests {
         int n = nums[m];  //记录值
         int n2 = 0;
         boolean flag = true;
-        if(k!=0){
-            if (nums.length % k == 0||k%2==0) {
+        if (k != 0) {
+            if (nums.length % k == 0 || k % 2 == 0) {
                 for (int q = 0; q < k; q++) {
                     while (flag) {
-                        m = (m  + k) % nums.length;
+                        m = (m + k) % nums.length;
                         n2 = nums[m];
                         nums[m] = n;
                         n = n2;
                         if (m < k) flag = false;
                     }
                     m++;
-                    n = nums[m%nums.length];
+                    n = nums[m % nums.length];
                     flag = true;
                 }
             } else {
@@ -78,7 +151,7 @@ class Easy_Array_Tests {
     }
 
 
-    //买卖股票的最佳时机 II
+    //买卖股票的最佳时机 II   通过
     @Test
     void maxProfit() {
 //        int nums[] = new int[]{1,2,3,4,5};
